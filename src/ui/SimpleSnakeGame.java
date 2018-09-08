@@ -30,7 +30,7 @@ public class SimpleSnakeGame extends Canvas implements Runnable {
 
         Random x = new Random();
         Random y = new Random();
-        SGame.addObject(new Food(x.nextInt(WIDTH),y.nextInt(HEIGHT)));
+        SGame.addObject(new Food(x.nextInt(WIDTH-1),y.nextInt(HEIGHT-1)));
 
 
     }

@@ -9,16 +9,21 @@ import java.util.List;
 import java.util.Random;
 
 import static model.Snake.*;
+import static ui.SimpleSnakeGame.HEIGHT;
+import static ui.SimpleSnakeGame.WIDTH;
 
 public class SGame {
 
     private List<GameObject> objects;
     private Snake snake ;
+    private Point head;
 
     private boolean isGameOver;
 
     public SGame(){
-        snake = new Snake();
+        head = new Point(WIDTH/2, HEIGHT/2);
+
+        snake = new Snake(head);
         objects = new LinkedList<>();
         objects.add(snake);
     }
@@ -41,7 +46,7 @@ public class SGame {
 
             Random x = new Random();
             Random y = new Random();
-            addObject(new Food(x.nextInt(SimpleSnakeGame.WIDTH),y.nextInt(SimpleSnakeGame.HEIGHT)));
+            addObject(new Food(x.nextInt(SimpleSnakeGame.WIDTH-1),y.nextInt(SimpleSnakeGame.HEIGHT-1)));
         }
     }
 
