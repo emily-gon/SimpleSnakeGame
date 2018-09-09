@@ -9,23 +9,19 @@ import java.util.List;
 import java.util.Random;
 
 import static model.Snake.*;
-import static ui.SimpleSnakeGame.HEIGHT;
-import static ui.SimpleSnakeGame.WIDTH;
 
 public class SGame {
 
     private List<GameObject> objects;
     private Snake snake ;
-    private Point head;
 
     private boolean isGameOver;
 
     public SGame(){
-        head = new Point(WIDTH/2, HEIGHT/2);
-
-        snake = new Snake(head);
+        snake = new Snake();
         objects = new LinkedList<>();
         objects.add(snake);
+        isGameOver = false;
     }
 
 
@@ -66,13 +62,13 @@ public class SGame {
 
     public void keyPressed(int keyCode) {
         if (keyCode == KeyEvent.VK_KP_LEFT || keyCode == KeyEvent.VK_LEFT)
-            snake.setDirection(LEFT);
+            snake.setDirection(LEFT,0);
         else if (keyCode == KeyEvent.VK_KP_RIGHT || keyCode == KeyEvent.VK_RIGHT)
-            snake.setDirection(RIGHT);
+            snake.setDirection(RIGHT,0);
         else if (keyCode == KeyEvent.VK_KP_DOWN || keyCode == KeyEvent.VK_DOWN)
-            snake.setDirection(DOWN);
+            snake.setDirection(DOWN,0);
         else if (keyCode == KeyEvent.VK_KP_UP || keyCode == KeyEvent.VK_UP)
-            snake.setDirection(UP);
+            snake.setDirection(UP,0);
         else if (keyCode == KeyEvent.VK_X)
             System.exit(0);
 

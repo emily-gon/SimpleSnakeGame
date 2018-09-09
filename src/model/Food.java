@@ -27,9 +27,9 @@ public class Food extends GameObject{
         g.fillOval(x,y,FOOD_WIDTH,FOOD_HEIGHT);
     }
 
-    public boolean eaten(GameObject snake){
+    public boolean eaten(Snake snake){
         Rectangle thisObject = new Rectangle(getX(),getY(),FOOD_WIDTH,FOOD_HEIGHT);
-        Rectangle snakeObject = new Rectangle(snake.getX(),snake.getY(),
+        Rectangle snakeObject = new Rectangle(snake.getHead().x,snake.getHead().y,
                 snake.getWidth(),snake.getHeight());
         return thisObject.intersects(snakeObject);
     }
