@@ -4,7 +4,10 @@ import java.awt.*;
 
 public abstract class GameObject {
 
+    // x, y position of object
     protected int x,y;
+
+    //width and height of snake parts
     protected int width,height;
 
     public GameObject(int x, int y){

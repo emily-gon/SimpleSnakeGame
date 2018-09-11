@@ -62,13 +62,13 @@ public class SGame {
 
     public void keyPressed(int keyCode) {
         if (keyCode == KeyEvent.VK_KP_LEFT || keyCode == KeyEvent.VK_LEFT)
-            snake.setDirection(LEFT,0);
+            snake.setDirection(LEFT);
         else if (keyCode == KeyEvent.VK_KP_RIGHT || keyCode == KeyEvent.VK_RIGHT)
-            snake.setDirection(RIGHT,0);
+            snake.setDirection(RIGHT);
         else if (keyCode == KeyEvent.VK_KP_DOWN || keyCode == KeyEvent.VK_DOWN)
-            snake.setDirection(DOWN,0);
+            snake.setDirection(DOWN);
         else if (keyCode == KeyEvent.VK_KP_UP || keyCode == KeyEvent.VK_UP)
-            snake.setDirection(UP,0);
+            snake.setDirection(UP);
         else if (keyCode == KeyEvent.VK_X)
             System.exit(0);
 
