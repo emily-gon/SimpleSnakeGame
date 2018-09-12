@@ -30,7 +30,7 @@ public class SimpleSnakeGame extends Canvas implements Runnable {
 
         Random x = new Random();
         Random y = new Random();
-        SGame.addObject(new Food(x.nextInt(WIDTH-11),y.nextInt(HEIGHT-11)));
+        SGame.addObject(new Food(x.nextInt(WIDTH-10),y.nextInt(HEIGHT-10)));
 
 
     }
@@ -106,6 +106,8 @@ public class SimpleSnakeGame extends Canvas implements Runnable {
             e.printStackTrace();
         }
     }
+
+
 
     private class KeyHandler extends KeyAdapter {
         @Override

@@ -9,18 +9,14 @@ import static ui.SimpleSnakeGame.WIDTH;
 public class Snake extends GameObject{
 
     //always in multiple of 10, START_LENGTH/10 is how many parts the snake has
-    public static final int START_LENGTH = 40;
+    public static final int START_LENGTH = 80;
 
     private ArrayList<Parts> snakeParts;
     private Parts head;
 
-    //x and y coordinates of head's previous position
-    private int headX;
-    private int headY;
-
     private static final int MOVE_LENGTH = 10;
     //timer determines the speed of snake, smaller the timer, faster the snake
-    private int timer = 10;
+    private int timer = 20;
 
     private Color snakeColor = Color.BLACK;
 
@@ -37,8 +33,7 @@ public class Snake extends GameObject{
         height = 10;
 
         head =  new Parts(WIDTH/2, HEIGHT/2,3);
-        headX = head.getX();
-        headY = head.getY();
+
 
         snakeParts = new ArrayList<>();
         snakeParts.add(head);
@@ -55,10 +50,12 @@ public class Snake extends GameObject{
         return snakeParts.size();
     }
 
+    public int getDirection(){
+        return head.getDirection();
+    }
+
     public void setDirection(int direction){
         head.setDirection(direction);
-        headX = head.getX();
-        headY = head.getY();
     }
 
     public void grow(){
@@ -66,15 +63,19 @@ public class Snake extends GameObject{
             switch(last.getDirection()) {
                 case UP:
                     snakeParts.add(new Parts(last.getX(),last.getY()+width,last.getDirection()));
+                    snakeParts.add(new Parts(last.getX(),last.getY()+width*2,last.getDirection()));
                     break;
                 case RIGHT:
                     snakeParts.add(new Parts(last.getX()-width,last.getY(),last.getDirection()));
+                    snakeParts.add(new Parts(last.getX()-width*2,last.getY(),last.getDirection()));
                     break;
                 case DOWN:
                     snakeParts.add(new Parts(last.getX(),last.getY()-width,last.getDirection()));
+                    snakeParts.add(new Parts(last.getX(),last.getY()-width*2,last.getDirection()));
                     break;
                 case LEFT:
                     snakeParts.add(new Parts(last.getX()+width,last.getY(),last.getDirection()));
+                    snakeParts.add(new Parts(last.getX()+width*2,last.getY(),last.getDirection()));
                     break;
             }
             System.out.println(snakeParts.size());
@@ -84,7 +85,7 @@ public class Snake extends GameObject{
     public void tick() {
         if (timer == 0) {
             move();
-            timer = 10;
+            timer = 20;
         }
         timer--;
     }
@@ -98,26 +99,32 @@ public class Snake extends GameObject{
     }
 
     private void move(){
-        for (Parts part : snakeParts) {
-            int x = part.getX();
-            int y = part.getY();
-            if (x == headX && y == headY) {
-                part.setDirection(head.getDirection());
-            }
-            switch (part.getDirection()) {
-                case UP:
-                    part.setY(y - MOVE_LENGTH);
-                    break;
-                case RIGHT:
-                    part.setX(x + MOVE_LENGTH);
-                    break;
-                case DOWN:
-                    part.setY(y + MOVE_LENGTH);
-                    break;
-                case LEFT:
-                    part.setX(x - MOVE_LENGTH);
-            }
+        snakeParts.remove((getLength())-1);
 
+        switch (head.getDirection()) {
+            case UP:
+                head = new Parts(head.getX(),head.getY()-MOVE_LENGTH,head.getDirection());
+                snakeParts.add(0,head);
+                break;
+            case RIGHT:
+                head = new Parts(head.getX()+MOVE_LENGTH,head.getY(),head.getDirection());
+                snakeParts.add(0,head);
+                break;
+            case DOWN:
+                head = new Parts(head.getX(),head.getY()+MOVE_LENGTH,head.getDirection());
+                snakeParts.add(0,head);                break;
+            case LEFT:
+                head = new Parts(head.getX()-MOVE_LENGTH,head.getY(),head.getDirection());
+                snakeParts.add(0,head);
         }
+
+    }
+
+    public boolean touch() {
+        for (Parts part : snakeParts) {
+            if (part.getX() == head.getX() && part.getY() == head.getY())
+                return true;
+        }
+        return false;
     }
 }
