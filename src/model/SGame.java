@@ -90,7 +90,7 @@ public class SGame {
     }
 
     private void gameOver(Graphics g){
-
+        System.out.println("Game Over!");
     }
 
 }

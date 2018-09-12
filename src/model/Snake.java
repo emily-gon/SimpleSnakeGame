@@ -118,11 +118,14 @@ public class Snake extends GameObject{
                 snakeParts.add(0,head);
         }
 
+
     }
 
     public boolean touch() {
         for (Parts part : snakeParts) {
-            if (part.getX() == head.getX() && part.getY() == head.getY())
+            Rectangle body = new Rectangle(part.getX(),part.getY(),width-1,height-1);
+            Rectangle head = new Rectangle(this.head.getX(),this.head.getY(),width-1,height-1);
+            if (body.contains(head))
                 return true;
         }
         return false;
